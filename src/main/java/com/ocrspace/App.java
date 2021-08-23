@@ -6,25 +6,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ocrspace.api.OCRSpaceAPIService;
+import com.ocrspace.utils.FileUtil;
 
-public class App 
-{
-    public static void main( String[] args ) {
-    	OCRSpaceAPIService apiService = new OCRSpaceAPIService();
+public class App {
+	
+	public static void processOCR(String apiKey, boolean isOverlayRequired, String language, String filePath) {
+		OCRSpaceAPIService apiService = new OCRSpaceAPIService();
+		File file = new File(filePath);
+		String fileType = FileUtil.getFileExtension(file);
+		String apiResult = apiService.sendPostViaFile(apiKey, isOverlayRequired, language, file, fileType);
 		
-		InputStream is;
+	}
+	
+    public static void main( String[] args ) {    	
+		
 		String apiKey = "";
 		boolean isOverlayRequired = false;
 		String language = "eng";
-		String fileType = "PDF";
 		
 		List<String> filePathList = new ArrayList<>();		
-		filePathList.add("bibiFILE.pdf");
+		filePathList.add("C:\\Users\\eunvi\\Desktop\\SK_Jeong Eunbi\\APU_transacript_Jeong Eunbi.pdf");
 		
 		for (String filePath : filePathList) {
-			System.out.println("----->>> NEW FILE PROCESS START - " + filePath);
-			File file = new File(filePath);
-			apiService.sendPostViaFile(apiKey, isOverlayRequired, language, file, fileType);
+			System.out.println("----->>> NEW FILE PROCESS START - " + filePath);			
+			processOCR(apiKey, isOverlayRequired, language, filePath);
 		}
 
     }

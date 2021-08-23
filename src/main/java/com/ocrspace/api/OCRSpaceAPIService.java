@@ -36,7 +36,9 @@ public class OCRSpaceAPIService {
 		    multipart.addFormField("apiKey", apiKey);
 		    multipart.addFormField("isOverlayRequired", Boolean.toString(isOverlayRequired));
 		    multipart.addFormField("isTable", Boolean.toString(true));
+		    multipart.addFormField("detectOrientation", Boolean.toString(true));
 		    multipart.addFormField("filetype", fileType);
+		    multipart.addFormField("scale", Boolean.toString(true));
             multipart.addFilePart("file", file);
             
             List<String> response = multipart.finish();
@@ -49,7 +51,6 @@ public class OCRSpaceAPIService {
         }
 
 		System.out.println(String.valueOf(responseString));
-        //return result
         return String.valueOf(responseString);
 	}
 	
@@ -86,7 +87,6 @@ public class OCRSpaceAPIService {
         
         System.out.println(String.valueOf(response));
 
-        //return result
         return String.valueOf(response);
         
 	}
